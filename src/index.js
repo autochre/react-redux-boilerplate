@@ -1,16 +1,16 @@
 import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './components/App'
-import {createStore} from 'redux'
+import {Provider} from 'react-redux'
 
-const store = createStore()
+import App from './components/App'
+import store from "./store"
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(
-  <AppContainer>
+  <Provider store={store}>
     <App />
-  </AppContainer>,
+  </Provider>,
   rootElement
 )
 
@@ -18,9 +18,9 @@ if (module.hot) {
   module.hot.accept('./components/App', () => {
     const NextApp = require('./components/App').default
     ReactDOM.render(
-      <AppContainer>
+      <Provider store={store}>
          <NextApp />
-      </AppContainer>,
+      </Provider>,
       rootElement
     )
   })
